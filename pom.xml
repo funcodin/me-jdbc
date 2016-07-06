@@ -4,9 +4,9 @@
    <groupId>com.multi.enterprise</groupId>
    <artifactId>me-jdbc</artifactId>
    <version>0.0.1-SNAPSHOT</version>
-   <packaging>war</packaging>
+   <packaging>jar</packaging>
    <name>me-jdbc</name>
-   <description>me-jdbc</description>
+   <description>me-jdbc (Jar)</description>
    <properties>
       <project.timestamp>${maven.build.timestamp}</project.timestamp>
       <org.springframework.version>4.1.4.RELEASE</org.springframework.version>
