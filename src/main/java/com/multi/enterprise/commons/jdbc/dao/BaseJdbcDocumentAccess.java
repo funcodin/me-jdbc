@@ -51,7 +51,7 @@ public abstract class BaseJdbcDocumentAccess<T extends Persistable> implements J
 	 * @see com.multi.enterprise.commons.jdbc.dao.DocumentAccess#create(com.multi.enterprise.commons.types.Persistable)
 	 */
 	@Override
-	public T create(final T create) {
+	public T create(final T create) throws DataAccessException {
 		final OrderedMapSqlParamaterSource params = this.parameterMapper.mapInsertSqlParams(create);
 
 		if (Objects.isNull(this.INSERT_STATEMENT))
@@ -74,7 +74,7 @@ public abstract class BaseJdbcDocumentAccess<T extends Persistable> implements J
 	 * @see com.multi.enterprise.commons.jdbc.dao.DocumentAccess#getById(java.lang.String)
 	 */
 	@Override
-	public T getById(String id) {
+	public T getById(String id) throws DataAccessException {
 		return this.jdbcTempalte.queryForObject(this.SELECT_STATEMENT, this.parameterMapper.mapIdParamater(id),
 				this.rowMapper);
 	}
@@ -85,7 +85,7 @@ public abstract class BaseJdbcDocumentAccess<T extends Persistable> implements J
 	 * @see com.multi.enterprise.commons.jdbc.dao.DocumentAccess#update(com.multi.enterprise.commons.types.Persistable)
 	 */
 	@Override
-	public T update(T update) {
+	public T update(T update) throws DataAccessException {
 		final OrderedMapSqlParamaterSource params = this.parameterMapper.mapUpdateSqlParams(update);
 		if (Objects.isNull(this.UPDATE_STATEMENT))
 			this.UPDATE_STATEMENT = JdbcDocumentAccessStatementBuilder.buildUpdateStatement(params,
@@ -101,7 +101,7 @@ public abstract class BaseJdbcDocumentAccess<T extends Persistable> implements J
 	 * @see com.multi.enterprise.commons.jdbc.dao.DocumentAccess#delete(com.multi.enterprise.commons.types.Persistable)
 	 */
 	@Override
-	public void delete(T delete) {
+	public void delete(T delete) throws DataAccessException {
 		this.jdbcTempalte.update(this.DELETE_STATEMENT, this.parameterMapper.mapIdParamater(delete.getId()));
 	}
 
