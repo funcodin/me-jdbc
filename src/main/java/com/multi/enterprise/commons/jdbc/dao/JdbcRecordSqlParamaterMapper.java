@@ -11,7 +11,7 @@ import com.multi.enterprise.types.Persistable;
  * @author Robot
  *
  */
-public interface JdbcDocumentSqlParamaterMapper<T extends Persistable> {
+public interface JdbcRecordSqlParamaterMapper<T extends Persistable> {
 
 	public OrderedMapSqlParamaterSource mapInsertSqlParams(T persistable);
 

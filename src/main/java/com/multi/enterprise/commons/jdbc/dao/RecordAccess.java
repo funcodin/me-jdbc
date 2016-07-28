@@ -9,7 +9,7 @@ import com.multi.enterprise.types.Persistable;
  * @author Robot
  *
  */
-public interface DocumentAccess<T extends Persistable> {
+public interface RecordAccess<T extends Persistable> {
 
 	public Class<T> getDocumentClass();
 
