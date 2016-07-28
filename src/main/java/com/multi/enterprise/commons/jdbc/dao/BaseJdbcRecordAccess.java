@@ -19,9 +19,9 @@ import com.multi.enterprise.types.Persistable;
  * @author Robot
  *
  */
-public abstract class BaseJdbcDocumentAccess<T extends Persistable> implements JdbcDocumentAccess<T> {
+public abstract class BaseJdbcRecordAccess<T extends Persistable> implements JdbcRecordAccess<T> {
 
-	private static final Logger log = LoggerFactory.getLogger(BaseJdbcDocumentAccess.class);
+	private static final Logger log = LoggerFactory.getLogger(BaseJdbcRecordAccess.class);
 
 	private String INSERT_STATEMENT;
 	private String SELECT_STATEMENT;
@@ -36,13 +36,13 @@ public abstract class BaseJdbcDocumentAccess<T extends Persistable> implements J
 	protected RowMapper<T> rowMapper;
 
 	@Autowired
-	protected JdbcDocumentSqlParamaterMapper<T> parameterMapper;
+	protected JdbcRecordSqlParamaterMapper<T> parameterMapper;
 
 	@PostConstruct
 	public void init() {
-		this.SELECT_STATEMENT = JdbcDocumentAccessStatementBuilder.buildSelectStatement(this.parameterMapper);
-		this.DELETE_STATEMENT = JdbcDocumentAccessStatementBuilder.buildDeleteStatement(this.parameterMapper);
-		this.LOCK_STATEMENT = JdbcDocumentAccessStatementBuilder.buildLockStatement(this.parameterMapper);
+		this.SELECT_STATEMENT = JdbcRecordAccessStatementBuilder.buildSelectStatement(this.parameterMapper);
+		this.DELETE_STATEMENT = JdbcRecordAccessStatementBuilder.buildDeleteStatement(this.parameterMapper);
+		this.LOCK_STATEMENT = JdbcRecordAccessStatementBuilder.buildLockStatement(this.parameterMapper);
 	}
 
 	/*
@@ -55,7 +55,7 @@ public abstract class BaseJdbcDocumentAccess<T extends Persistable> implements J
 		final OrderedMapSqlParamaterSource params = this.parameterMapper.mapInsertSqlParams(create);
 
 		if (Objects.isNull(this.INSERT_STATEMENT))
-			this.INSERT_STATEMENT = JdbcDocumentAccessStatementBuilder.buildInsertStatement(params,
+			this.INSERT_STATEMENT = JdbcRecordAccessStatementBuilder.buildInsertStatement(params,
 					this.parameterMapper);
 
 		if (this.parameterMapper.isGeneratingKeys()) {
@@ -88,7 +88,7 @@ public abstract class BaseJdbcDocumentAccess<T extends Persistable> implements J
 	public T update(T update) throws DataAccessException {
 		final OrderedMapSqlParamaterSource params = this.parameterMapper.mapUpdateSqlParams(update);
 		if (Objects.isNull(this.UPDATE_STATEMENT))
-			this.UPDATE_STATEMENT = JdbcDocumentAccessStatementBuilder.buildUpdateStatement(params,
+			this.UPDATE_STATEMENT = JdbcRecordAccessStatementBuilder.buildUpdateStatement(params,
 					this.parameterMapper);
 
 		this.jdbcTempalte.update(this.UPDATE_STATEMENT, params);
