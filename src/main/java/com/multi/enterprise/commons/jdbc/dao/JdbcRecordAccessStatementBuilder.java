@@ -19,8 +19,8 @@ public class JdbcRecordAccessStatementBuilder {
 	private static final String DELETE_STATEMENT_TEMPLATE = "DELETE FROM %s WHERE %s = :%s";
 	private static final String LOCK_STATEMENT_TEMPLATE = "SELECT * FROM %s WHERE %s = :%s FOR UPDATE";
 
-	public static <T extends Persistable> String buildInsertStatement(final OrderedMapSqlParamaterSource params,
-			final JdbcRecordSqlParamaterMapper<T> paramMapper) {
+	public static <T extends Persistable> String buildInsertStatement(final OrderedMapSqlParameterSource params,
+			final JdbcRecordSqlParameterMapper<T> paramMapper) {
 		final List<String> keys = params.getKeys();
 		final String columns = StringUtils.join(keys, ", ");
 		final List<String> bindVariableList = keys.stream().map(e -> ":" + e).collect(Collectors.toList());
@@ -32,13 +32,13 @@ public class JdbcRecordAccessStatementBuilder {
 	// CRUD
 
 	public static <T extends Persistable> String buildSelectStatement(
-			final JdbcRecordSqlParamaterMapper<T> paramMapper) {
+			final JdbcRecordSqlParameterMapper<T> paramMapper) {
 		return String.format(SELECT_STATEMENT_TEMPLATE, paramMapper.getTableName(), paramMapper.getIdColumnName(),
 				paramMapper.getIdColumnName());
 	}
 
-	public static <T extends Persistable> String buildUpdateStatement(final OrderedMapSqlParamaterSource params,
-			final JdbcRecordSqlParamaterMapper<T> paramMapper) {
+	public static <T extends Persistable> String buildUpdateStatement(final OrderedMapSqlParameterSource params,
+			final JdbcRecordSqlParameterMapper<T> paramMapper) {
 		final List<String> updateKeys = params.getKeys();
 		final List<String> updateClauseList = updateKeys.stream().map(e -> e + "= :" + e).collect(Collectors.toList());
 		final String updateClauses = StringUtils.join(updateClauseList, ", ");
@@ -48,12 +48,12 @@ public class JdbcRecordAccessStatementBuilder {
 	}
 
 	public static <T extends Persistable> String buildDeleteStatement(
-			final JdbcRecordSqlParamaterMapper<T> paramMapper) {
+			final JdbcRecordSqlParameterMapper<T> paramMapper) {
 		return String.format(DELETE_STATEMENT_TEMPLATE, paramMapper.getTableName(), paramMapper.getIdColumnName(),
 				paramMapper.getIdColumnName());
 	}
 
-	public static <T extends Persistable> String buildLockStatement(final JdbcRecordSqlParamaterMapper<T> paramMapper) {
+	public static <T extends Persistable> String buildLockStatement(final JdbcRecordSqlParameterMapper<T> paramMapper) {
 		return String.format(LOCK_STATEMENT_TEMPLATE, paramMapper.getTableName(), paramMapper.getIdColumnName(),
 				paramMapper.getIdColumnName());
 	}

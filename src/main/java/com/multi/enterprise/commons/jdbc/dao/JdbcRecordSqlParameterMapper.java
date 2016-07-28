@@ -11,11 +11,11 @@ import com.multi.enterprise.types.Persistable;
  * @author Robot
  *
  */
-public interface JdbcRecordSqlParamaterMapper<T extends Persistable> {
+public interface JdbcRecordSqlParameterMapper<T extends Persistable> {
 
-	public OrderedMapSqlParamaterSource mapInsertSqlParams(T persistable);
+	public OrderedMapSqlParameterSource mapInsertSqlParams(T persistable);
 
-	public OrderedMapSqlParamaterSource mapUpdateSqlParams(T persistable);
+	public OrderedMapSqlParameterSource mapUpdateSqlParams(T persistable);
 
 	public SqlParameterSource mapIdParamater(String id);
 

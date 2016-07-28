@@ -17,14 +17,14 @@ import org.springframework.util.Assert;
  * @author Robot
  *
  */
-public class OrderedMapSqlParamaterSource extends AbstractSqlParameterSource {
+public class OrderedMapSqlParameterSource extends AbstractSqlParameterSource {
 
 	private final LinkedMap<String, Object> values = new LinkedMap<String, Object>();
 
-	public OrderedMapSqlParamaterSource() {
+	public OrderedMapSqlParameterSource() {
 	}
 
-	public OrderedMapSqlParamaterSource(final String paramName, final Object value) {
+	public OrderedMapSqlParameterSource(final String paramName, final Object value) {
 		this.addValue(paramName, value);
 	}
 
@@ -43,7 +43,7 @@ public class OrderedMapSqlParamaterSource extends AbstractSqlParameterSource {
 		return this.values.containsKey(paramName);
 	}
 
-	public OrderedMapSqlParamaterSource addValues(final OrderedMap<String, ?> values) {
+	public OrderedMapSqlParameterSource addValues(final OrderedMap<String, ?> values) {
 		if (Objects.nonNull(values)) {
 			for (final OrderedMapIterator<String, ?> iterator = values.mapIterator(); iterator.hasNext();) {
 				final String key = iterator.next();
@@ -58,7 +58,7 @@ public class OrderedMapSqlParamaterSource extends AbstractSqlParameterSource {
 		return this;
 	}
 
-	public OrderedMapSqlParamaterSource addValue(final String paramName, final Object value, final int sqlType,
+	public OrderedMapSqlParameterSource addValue(final String paramName, final Object value, final int sqlType,
 			final String typeName) {
 
 		Assert.notNull(paramName, "Param name is required ");
@@ -68,14 +68,14 @@ public class OrderedMapSqlParamaterSource extends AbstractSqlParameterSource {
 		return this;
 	}
 
-	public OrderedMapSqlParamaterSource addValue(final String paramName, final Object value, final int sqlType) {
+	public OrderedMapSqlParameterSource addValue(final String paramName, final Object value, final int sqlType) {
 		Assert.notNull(paramName, "Param name is required");
 		this.values.put(paramName, value);
 		this.registerSqlType(paramName, sqlType);
 		return this;
 	}
 
-	public OrderedMapSqlParamaterSource addValue(final String paramName, final Object value) {
+	public OrderedMapSqlParameterSource addValue(final String paramName, final Object value) {
 		Assert.notNull(paramName, " Param name is required ");
 		this.values.put(paramName, value);
 		if (value instanceof SqlParameterValue)
