@@ -36,7 +36,7 @@ public abstract class BaseJdbcRecordAccess<T extends Persistable> implements Jdb
 	protected RowMapper<T> rowMapper;
 
 	@Autowired
-	protected JdbcRecordSqlParamaterMapper<T> parameterMapper;
+	protected JdbcRecordSqlParameterMapper<T> parameterMapper;
 
 	@PostConstruct
 	public void init() {
@@ -52,7 +52,7 @@ public abstract class BaseJdbcRecordAccess<T extends Persistable> implements Jdb
 	 */
 	@Override
 	public T create(final T create) throws DataAccessException {
-		final OrderedMapSqlParamaterSource params = this.parameterMapper.mapInsertSqlParams(create);
+		final OrderedMapSqlParameterSource params = this.parameterMapper.mapInsertSqlParams(create);
 
 		if (Objects.isNull(this.INSERT_STATEMENT))
 			this.INSERT_STATEMENT = JdbcRecordAccessStatementBuilder.buildInsertStatement(params,
@@ -86,7 +86,7 @@ public abstract class BaseJdbcRecordAccess<T extends Persistable> implements Jdb
 	 */
 	@Override
 	public T update(T update) throws DataAccessException {
-		final OrderedMapSqlParamaterSource params = this.parameterMapper.mapUpdateSqlParams(update);
+		final OrderedMapSqlParameterSource params = this.parameterMapper.mapUpdateSqlParams(update);
 		if (Objects.isNull(this.UPDATE_STATEMENT))
 			this.UPDATE_STATEMENT = JdbcRecordAccessStatementBuilder.buildUpdateStatement(params,
 					this.parameterMapper);
