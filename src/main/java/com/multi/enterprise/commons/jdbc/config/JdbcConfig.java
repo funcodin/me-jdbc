@@ -41,7 +41,8 @@ public class JdbcConfig {
 		comboPooledDataSource.setInitialPoolSize(8);
 		comboPooledDataSource.setMaxPoolSize(20);
 		comboPooledDataSource.setNumHelperThreads(5);
-		comboPooledDataSource.setIdleConnectionTestPeriod(600);
+		comboPooledDataSource.setIdleConnectionTestPeriod(1600);
+		comboPooledDataSource.setMaxIdleTime(2000);
 
 		return comboPooledDataSource;
 	}
