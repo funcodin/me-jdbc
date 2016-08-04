@@ -25,7 +25,7 @@ public class JdbcConfig {
 	private String jdbcUrl;
 	@Value("${jdbc.username}")
 	private String jdbcUserName;
-	@Value("${jdbc.password}")
+	@Value("${jdbc.password:}")
 	private String jdbcPassword;
 	@Value("${jdbc.driver.class:com.mysql.jdbc.Driver}")
 	private String jdbcDriverClass;
@@ -33,11 +33,9 @@ public class JdbcConfig {
 	@Bean
 	public ComboPooledDataSource comboPooledDataSource() throws Exception {
 		final ComboPooledDataSource comboPooledDataSource = new ComboPooledDataSource();
-		System.out.println("****Testing if the params are right");
 		comboPooledDataSource.setDriverClass(this.jdbcDriverClass);
 		comboPooledDataSource.setJdbcUrl(this.jdbcUrl);
 		comboPooledDataSource.setUser(this.jdbcUserName);
-		System.out.println(this.jdbcUserName);
 		comboPooledDataSource.setPassword(this.jdbcPassword);
 		comboPooledDataSource.setTestConnectionOnCheckout(true);
 		comboPooledDataSource.setInitialPoolSize(8);
