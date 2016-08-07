@@ -8,10 +8,11 @@ import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.multi.enterprise.commons.jdbc.dao.RecordAccess;
 import com.multi.enterprise.types.Persistable;
+import com.multi.enterprise.types.dao.RecordAccess;
 import com.multi.enterprise.types.exception.EntityNotFoundException;
 import com.multi.enterprise.types.exception.ServiceException;
+import com.multi.enterprise.types.service.RecordService;
 
 /**
  * @author Robot
