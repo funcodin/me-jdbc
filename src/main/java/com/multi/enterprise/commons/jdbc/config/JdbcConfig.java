@@ -66,6 +66,7 @@ public class JdbcConfig {
 		return transactionManager;
 	}
 
+	@Bean
 	public TransactionTemplate transcationTemplate() throws Exception {
 
 		final TransactionTemplate transcationTemplate = new TransactionTemplate();
